@@ -1,28 +1,40 @@
-const { Tech, Matchup } = require('../models');
+const { User, Playlist } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    tech: async () => {
-      return Tech.find({});
+    User: async () => {
+      return User.find({});
     },
-    matchups: async (parent, { _id }) => {
+    Playlist: async (parent, { _id }) => {
       const params = _id ? { _id } : {};
-      return Matchup.find(params);
+      return Playlist.find(params);
     },
   },
   Mutation: {
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
+    createUser: async (parent, {email, username, password}) => {
+      const user = await User.create({email, username, password});
+
+      const token = signToken(user);
+      return {user, token};
     },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
-        { new: true }
-      );
-      return vote;
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+          return res.status(400).json({ message: 'No user found by that email'});
+      }
+
+      const correctPassword = await user.isCorrectPassword(body.password);
+
+      if (!correctPassword) {
+        return res.status(400).json({ message: 'Incorrect password'});
+      }
+
+      const token = signToken(user);
+      return { token, user };
     },
+    
   },
 };
 
