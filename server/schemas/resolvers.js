@@ -34,7 +34,30 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    
+    addPlaylist: async (parent, {playlist_id}, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$addToSet: { playlist: playlist_id}},
+          {new: true, runValidators: true}
+        );
+        return updatedUser;
+      } else {
+        return res.status(400).json({ message: 'Failed to save playlist'});
+      }
+    },
+    removePlaylist: async (parent, {playlist_id}, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$pull: { playlist: {playlist_id: playlist_id}}},
+          {new: true}
+        );
+        return updatedUser;
+      } else {
+        return res.status(400).json({ message: 'Failed to delete playlist'});
+      }
+    },
   },
 };
 
