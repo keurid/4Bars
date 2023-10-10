@@ -8,11 +8,11 @@ const playlistSchema = new Schema({
   },
   playlist_id: {
     type: String,
-
+    required: true,
   },
   owner: [
     {
-      type: Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
     }
   ]

@@ -1,4 +1,5 @@
 const { User, Playlist } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -16,6 +17,22 @@ const resolvers = {
 
       const token = signToken(user);
       return {user, token};
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+          return res.status(400).json({ message: 'No user found by that email'});
+      }
+
+      const correctPassword = await user.isCorrectPassword(body.password);
+
+      if (!correctPassword) {
+        return res.status(400).json({ message: 'Incorrect password'});
+      }
+
+      const token = signToken(user);
+      return { token, user };
     },
     
   },
