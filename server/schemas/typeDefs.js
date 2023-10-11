@@ -3,6 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID!
+    email: String!
     username: String!
     name: String!
     playlist: [playlist]
@@ -10,8 +11,18 @@ const typeDefs = gql`
 
   type Playlist {
     _id: ID!
-    playlist_id: String!
-    owner: [String!]
+    name: String!
+    description: String!
+    songs: [Song]
+  }
+
+  type Song {
+    idAlbum: Int
+    idArtist: Int!
+    idTrack: Int!
+    strAlbum: String
+    strArtist: String
+    strTrack: String
   }
 
   type auth {
