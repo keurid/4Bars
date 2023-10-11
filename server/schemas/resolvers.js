@@ -46,7 +46,18 @@ const resolvers = {
         return res.status(400).json({ message: 'No playlist found with this ID'});
       }
     },
-    deleteSong: async (parent, {})
+    deleteSong: async (parent, {idTrack}, context) => {
+      if (context.playlist) {
+        const updatedPlaylist = await Playlist.findOneAndUpdate(
+          {_id: context.playlist._id},
+          {$pull: {songs: idTrack}},
+          {new: true}
+        );
+        return updatedPlaylist;
+      } else {
+        return res.status(400).json({ message: 'No playlist found with this ID'});
+      }
+    },
   },
 };
 

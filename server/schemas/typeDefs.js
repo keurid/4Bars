@@ -25,6 +25,15 @@ const typeDefs = gql`
     strTrack: String
   }
 
+  input newSong {
+    idAlbum: Int
+    idArtist: Int!
+    idTrack: Int!
+    strAlbum: String
+    strArtist: String
+    strTrack: String
+  }
+
   type auth {
     token: ID!
     user: User
@@ -38,6 +47,8 @@ const typeDefs = gql`
   type Mutation {
     createUser(username: String!, email: String!, password: String!): auth
     login(email: String!, password: String!): auth
+    saveSong(newSong: newSong):Playlist
+    deleteSong(idTrack: Int):Playlist
   }
 `;
 
