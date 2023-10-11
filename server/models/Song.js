@@ -6,9 +6,11 @@ const songSchema = new Schema({
     },
     idArtist: {
         type: Number,
+        required: true,
     },
     idTrack: {
         type: Number,
+        required: true,
     },
     strAlbum: {
         type: String,

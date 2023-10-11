@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 
+const songSchema = require('./Song');
+
 const playlistSchema = new Schema({
   name: {
     type: String,
@@ -10,12 +12,7 @@ const playlistSchema = new Schema({
     type: String,
     required: true,
   },
-  songs: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Song'
-    }
-  ]
+  songs: [songSchema],
 });
 
 const Playlist = model('Playlist', playlistSchema);
