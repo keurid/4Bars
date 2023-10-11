@@ -34,7 +34,30 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    
+    saveSong: async (parent, { newSong }, context) => {
+      if (context.Playlist) {
+        const updatedPlaylist = await Playlist.findOneAndUpdate(
+          {_id: context.Playlist._id},
+          {$push: { songs: newSong}},
+          {new: true}
+        );
+        return updatedPlaylist;
+      } else {
+        return res.status(400).json({ message: 'No playlist found with this ID'});
+      }
+    },
+    deleteSong: async (parent, {idTrack}, context) => {
+      if (context.Playlist) {
+        const updatedPlaylist = await Playlist.findOneAndUpdate(
+          {_id: context.Playlist._id},
+          {$pull: {songs: idTrack}},
+          {new: true}
+        );
+        return updatedPlaylist;
+      } else {
+        return res.status(400).json({ message: 'No playlist found with this ID'});
+      }
+    },
   },
 };
 

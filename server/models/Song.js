@@ -6,9 +6,11 @@ const songSchema = new Schema({
     },
     idArtist: {
         type: Number,
+        required: true,
     },
     idTrack: {
         type: Number,
+        required: true,
     },
     strAlbum: {
         type: String,
@@ -24,6 +26,4 @@ const songSchema = new Schema({
     }
 });
 
-const Song = model('Song', songSchema);
-
-module.exports = Song;
+module.exports = songSchema;

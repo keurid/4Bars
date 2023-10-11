@@ -26,13 +26,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  playlist: [playlistSchema],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ],
+  Playlist: [playlistSchema],
 },
   {
     toJSON: {
