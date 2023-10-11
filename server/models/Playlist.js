@@ -15,6 +15,4 @@ const playlistSchema = new Schema({
   songs: [songSchema],
 });
 
-const Playlist = model('Playlist', playlistSchema);
-
-module.exports = Playlist;
+module.exports = playlistSchema;

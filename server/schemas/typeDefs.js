@@ -6,7 +6,7 @@ const typeDefs = gql`
     email: String!
     username: String!
     name: String!
-    playlist: [playlist]
+    Playlist: [Playlist]
   }
 
   type Playlist {
@@ -40,8 +40,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: [User]
-    playlist(_id: String): [playlist]
+    User: [User]
+    Playlist(_id: String): [Playlist]
   }
 
   type Mutation {

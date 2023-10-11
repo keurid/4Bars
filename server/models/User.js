@@ -26,7 +26,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  playlist: [playlistSchema],
+  Playlist: [playlistSchema],
 },
   {
     toJSON: {

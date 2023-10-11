@@ -35,9 +35,9 @@ const resolvers = {
       return { token, user };
     },
     saveSong: async (parent, { newSong }, context) => {
-      if (context.playlist) {
+      if (context.Playlist) {
         const updatedPlaylist = await Playlist.findOneAndUpdate(
-          {_id: context.playlist._id},
+          {_id: context.Playlist._id},
           {$push: { songs: newSong}},
           {new: true}
         );
@@ -47,9 +47,9 @@ const resolvers = {
       }
     },
     deleteSong: async (parent, {idTrack}, context) => {
-      if (context.playlist) {
+      if (context.Playlist) {
         const updatedPlaylist = await Playlist.findOneAndUpdate(
-          {_id: context.playlist._id},
+          {_id: context.Playlist._id},
           {$pull: {songs: idTrack}},
           {new: true}
         );
