@@ -6,14 +6,14 @@ const playlistSchema = new Schema({
     required: true,
     unique: true,
   },
-  playlist_id: {
+  description: {
     type: String,
     required: true,
   },
-  owner: [
+  songs: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Song'
     }
   ]
 });
