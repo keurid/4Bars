@@ -1,4 +1,4 @@
-const { User, Playlist } = require('../models');
+const { User, Playlist, Song } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -33,6 +33,29 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+    createPlaylist: async (parent, {newPlaylist}, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id},
+          {$addToSet: { Playlist: newPlaylist}},
+          {new: true}
+        );
+        return updatedUser;
+      }else {
+        return res.status(400).json({ message: 'No user found with this ID'});
+      }
+    },
+    deletePlaylist: async (parent, {playlist_id}, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          {$pull: { Playlist: playlist_id}},
+          {new: true}
+        )
+      }else {
+        return res.status(400).json({ message: 'No user found with this ID'});
+      }
     },
     saveSong: async (parent, { newSong }, context) => {
       if (context.Playlist) {
