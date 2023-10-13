@@ -1,51 +1,43 @@
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const typeDefs = require('../public');
-const resolvers = require('../');
-const User = require('./models/User');
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 
-require('dotenv').config();
-
-const app = express();
-
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
+import { setContext } from '@apollo/client/link/context';
+const httpLink = createHttpLink({
+  uri: '/graphql',
 });
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+
+    },
+  };
 });
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_default_secret_key';
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => {
-    const token = req.headers.authorization || '';
-
-    let user = null;
-    try {
-      if (token) {
-        user = jwt.verify(token, JWT_SECRET);
-      }
-    } catch (error) {
-      console.error('Error verifying JWT token:', error.message);
-    }
-
-    return { user };
-  },
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
-server.applyMiddleware({ app });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}${server.graphqlPath}`);
-});
+export default function App(){
+  return(
+    <ApolloProvider client={client}>
+      <router>
+        <main>
+          <Header />
+          <Footer />
+        </main>
+    </router>
+    </ApolloProvider>
+  )
+}
