@@ -12,73 +12,73 @@ const resolvers = {
     },
   },
   Mutation: {
-    createUser: async (parent, {email, username, password}) => {
-      const user = await User.create({email, username, password});
-
+    createUser: async (parent, { email, username, password }) => {
+      const user = await User.create({ email, username, password });
       const token = signToken(user);
-      return {user, token};
+      return { user, token };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-          return res.status(400).json({ message: 'No user found by that email'});
+        throw new Error('No user found by that email');
       }
 
-      const correctPassword = await user.isCorrectPassword(body.password);
+      const correctPassword = await user.isCorrectPassword(password);
 
       if (!correctPassword) {
-        return res.status(400).json({ message: 'Incorrect password'});
+        throw new Error('Incorrect password');
       }
 
       const token = signToken(user);
       return { token, user };
     },
-    createPlaylist: async (parent, {newPlaylist}, context) => {
+    createPlaylist: async (parent, { newPlaylist }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id},
-          {$addToSet: { Playlist: newPlaylist}},
-          {new: true}
+          { _id: context.user._id },
+          { $addToSet: { Playlist: newPlaylist } },
+          { new: true }
         );
-        return updatedUser;
-      }else {
-        return res.status(400).json({ message: 'No user found with this ID'});
+        return newPlaylist;
+      } else {
+        throw new Error('No user found in the context');
       }
     },
-    deletePlaylist: async (parent, {playlist_id}, context) => {
+    deletePlaylist: async (parent, { playlist_id }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          {_id: context.user._id},
-          {$pull: { Playlist: playlist_id}},
-          {new: true}
-        )
-      }else {
-        return res.status(400).json({ message: 'No user found with this ID'});
+          { _id: context.user._id },
+          { $pull: { Playlist: playlist_id } },
+          { new: true }
+        );
+        return updatedUser;
+      } else {
+        throw new Error('No user found in the context');
       }
     },
     saveSong: async (parent, { newSong }, context) => {
       if (context.Playlist) {
         const updatedPlaylist = await Playlist.findOneAndUpdate(
-          {_id: context.Playlist._id},
-          {$push: { songs: newSong}},
-          {new: true}
+          { _id: context.Playlist._id },
+          { $push: { songs: newSong } },
+          { new: true }
         );
         return updatedPlaylist;
       } else {
-        return res.status(400).json({ message: 'No playlist found with this ID'});
+        throw new Error('No playlist found in the context');
       }
     },
-    deleteSong: async (parent, {idTrack}, context) => {
+    deleteSong: async (parent, { idTrack }, context) => {
       if (context.Playlist) {
         const updatedPlaylist = await Playlist.findOneAndUpdate(
-          {_id: context.Playlist._id},
-          {$pull: {songs: idTrack}},
-          {new: true}
+          { _id: context.Playlist._id },
+          { $pull: { songs: idTrack } },
+          { new: true }
         );
         return updatedPlaylist;
       } else {
-        return res.status(400).json({ message: 'No playlist found with this ID'});
+        throw new Error('No playlist found in the context');
       }
     },
   },

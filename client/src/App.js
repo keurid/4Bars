@@ -2,8 +2,8 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
+const typeDefs = require('../public');
+const resolvers = require('../');
 const User = require('./models/User');
 
 require('dotenv').config();
@@ -45,7 +45,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}${server.graphqlPath}`);
 });
