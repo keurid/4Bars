@@ -8,7 +8,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address',],
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address'],
   },
   username: {
     type: String,
@@ -26,33 +26,37 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  playlist: [playlistSchema],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ],
+  Playlist: [playlistSchema],
 },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
+{
+  toJSON: {
+    virtuals: true,
+  },
+});
 
 userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password =await bcrypt.hash(this.password, saltRounds);
+  try {
+    if (this.isNew || this.isModified('password')) {
+      const saltRounds = 10;
+      this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+    next();
+  } catch (error) {
+    next(error);
   }
-
-  next();
-})
+});
 
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
+
+userSchema.post('save', function (error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('Duplicate key error'));
+  } else {
+    next(error);
+  }
+});
 
 const User = model('User', userSchema);
 
