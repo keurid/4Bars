@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import {
@@ -7,14 +8,36 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+
 import { setContext } from '@apollo/client/link/context';
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 
 export default function App(){
   return(
-    <main>
-      <Header />
-      <Footer />
-    </main>
+    <ApolloProvider client={client}>
+      <router>
+        <main>
+          <Header />
+          <Footer />
+        </main>
+    </router>
+    </ApolloProvider>
   )
 }
