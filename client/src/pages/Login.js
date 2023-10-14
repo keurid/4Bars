@@ -55,16 +55,16 @@ const App = () => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
+        {/* <a className="login-form-forgot" href="">
           Forgot password
-        </a>
+        </a> */}
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        Or <a href="">register now!</a>
+        Or <a href="/signup">register now!</a>
       </Form.Item>
     </Form>
   );
