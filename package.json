@@ -16,6 +16,8 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.0.0",
+    "antd": "^5.10.0",
     "apollo-server-express": "^2.15.0"
   }
 }
