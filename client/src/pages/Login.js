@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
+import Signup from '../components/Signup';
 
 
 function Login(props) {
@@ -29,6 +30,12 @@ function Login(props) {
       [name]: value,
     });
   };
+
+  //SIGN UP
+  
+  
+
+
 
   return (
     <div className="container my-1">
@@ -65,6 +72,7 @@ function Login(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Signup />
     </div>
   );
 }
