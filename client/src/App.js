@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import Login from "./pages/Login.js";
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,6 +11,7 @@ import {
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
+//import Login from "./pages/login";
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -35,6 +37,7 @@ export default function App(){
       <router>
         <main>
           <Header />
+          <Login />
           <Footer />
         </main>
     </router>
