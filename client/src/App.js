@@ -1,15 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-
+import Login from "./pages/Login.js";
+import Home from "./pages/Home.js"; 
+import About from "./pages/About.js"; 
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -18,7 +16,6 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-
     },
   };
 });
@@ -28,16 +25,20 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
-export default function App(){
-  return(
+function App() {
+  return (
     <ApolloProvider client={client}>
-      <router>
-        <main>
-          <Header />
-          <Footer />
-        </main>
-    </router>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </Router>
     </ApolloProvider>
-  )
+  );
 }
+
+export default App;
