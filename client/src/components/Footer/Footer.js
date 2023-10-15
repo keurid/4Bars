@@ -1,6 +1,6 @@
 import React from "react";
 import { WanderingPet } from "react-wandering-pet";
-import catGif from "react-wandering-pet/dist/assets/cat.gif";
+import catGif from "react-wandering-pet/dist/assets/cat.gif"; // You can also import the cat GIF itself if you'd like
 
 const Footer = () => {
   const textStyle = {
