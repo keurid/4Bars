@@ -6,6 +6,7 @@ import Login from "./pages/Login.js";
 import Home from "./pages/Home.js"; 
 import About from "./pages/About.js"; 
 import Signup from "./pages/Signup.js"
+import Search from "./pages/Search.js"
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
         <Footer />
       </Router>
