@@ -8,6 +8,7 @@ import About from "./pages/About.js";
 import Signup from "./pages/Signup.js"
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import AlbumDetails from './components/AlbumDetails/AlbumDetails';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -36,6 +37,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/album" element={<AlbumDetails />}/>
         </Routes>
         <Footer />
       </Router>
