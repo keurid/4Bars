@@ -9,8 +9,7 @@ const Signup = () => {
   const [form] = Form.useForm();
 
   const [formState, setFormState] = useState({
-    firstName: '',
-    lastName: '',
+    username: '',
     email: '',
     password: '',
     confirm: '',
@@ -20,7 +19,8 @@ const Signup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+console.log (name)
+console.log(value)
     setFormState({
       ...formState,
       [name]: value,
@@ -29,11 +29,10 @@ const Signup = () => {
 
   const handleFormSubmit = async () => {
     try {
-      
+      console.log (formState)
       const { data } = await addUser({
         variables: {
-          firstName: formState.firstName,
-          lastName: formState.lastName,
+          username: formState.username,
           email: formState.email,
           password: formState.password,
         },
@@ -60,24 +59,17 @@ const Signup = () => {
         scrollToFirstError
       >
         <Form.Item
-          name="firstName"
-          value={formState.name}
+          value={formState.username}
           onChange={handleChange}
-          rules={[{ required: true, message: 'Please input a name!' }]}
+          rules={[{ required: true, message: 'Please input a username!' }]}
         >
-          <Input placeholder="First name" />
+          <Input placeholder="Username" name="username"/>
+
         </Form.Item>
-        <Form.Item
-          name="LastName"
-          value={formState.lastName}
-          onChange={handleChange}
-          rules={[{ required: true, message: 'Please input a name!' }]}
-        >
-          <Input placeholder="Last name" />
-        </Form.Item>
+
         <Form.Item
 
-          name="email"
+
           value={formState.email}
           onChange={handleChange}
           rules={[
@@ -91,12 +83,12 @@ const Signup = () => {
             },
           ]}
         >
-          <Input placeholder="Email" />
+          <Input placeholder="Email"           name="email"/>
         </Form.Item>
 
         <Form.Item
 
-          name="password"
+
           value={formState.password}
           onChange={handleChange}
           rules={[
@@ -106,11 +98,11 @@ const Signup = () => {
             },
           ]}
         >
-          <Input.Password placeholder="Password" />
+          <Input.Password placeholder="Password"           name="password"/>
         </Form.Item>
 
         <Form.Item
-          name="confirm"
+
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -130,7 +122,7 @@ const Signup = () => {
             }),
           ]}
         >
-          <Input.Password placeholder="Confirm Password" />
+          <Input.Password placeholder="Confirm Password"           name="confirm"/>
         </Form.Item>
 
         <Form.Item>
