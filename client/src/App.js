@@ -10,6 +10,7 @@ import Search from "./pages/Search.js"
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import AlbumDetails from './components/AlbumDetails/AlbumDetails';
+import Nav from './components/Nav';
 
 const httpLink = createHttpLink({
   uri: '/graphql', 
@@ -33,12 +34,14 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
+        <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/album" element={<AlbumDetails />}/>
+          {/* <Route path="/album" element={<AlbumDetails />}/> */}
+          <Route path="/search" element={<Search />}/>
         </Routes>
         <Footer />
       </Router>

@@ -36,10 +36,11 @@ export default function Search() {
       <div>
         {albums.map((album, index) => (
           <div key={index}>
-            <p onClick={() => handleLocalStorage(album.idAlbum, album.idArtist)}>
-              {album.strAlbum}
-            </p>
-            <p>{album.idArtist}</p>
+            <ul  onClick={() => handleLocalStorage(album.idAlbum, album.idArtist)}>
+            <img src={album.strAlbumThumb}></img>
+            <p>{album.strAlbum}</p>
+            </ul>
+            {/* <p>{album.idArtist}</p> */}
           </div>
         ))}
       </div>
