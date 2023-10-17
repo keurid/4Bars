@@ -1,50 +1,46 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import AlbumDetails from "../components/AlbumDetails/AlbumDetails";
 const key = "523532";
 
 export default function Search() {
-  const [search, setSearch] = useState("");
-  
-  // const navigate = useNavigate();
-  let searchResults = {};
-  // const handleLocalStorage = (id, artistId) => {
-  //   localStorage.setItem("selectedAlbum", id);
-  //   localStorage.setItem("selectedArtist", artistId);
-  //   navigate("/album");
-  // };
+  const [searchForm, setSearchForm] = useState("");
+  const [isLoading, setLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState({});
 
-  const handleSearch = async () => {
-    // console.log(search);
-    // fetch(
-    //   `https://www.theaudiodb.com/api/v1/json/${key}/searchalbum.php?s=${search}`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setAlbums(data.album);
-    //   })
-    //   .catch((err) => console.log(err));
-
-    const searchData = await fetch(
-      `https://www.theaudiodb.com/api/v1/json/${key}/searchalbum.php?s=${search}`
-    );
-    searchResults = searchData.json();
-    console.log("searchResults");
-    console.log(searchResults);
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    try {
+      const searchData = await fetch(
+        `https://www.theaudiodb.com/api/v1/json/${key}/searchalbum.php?s=${searchForm}`
+      );
+      const searchResultsJSON = await searchData.json();
+      console.log("searchResults");
+      console.log(searchResultsJSON);
+      setSearchResults(searchResultsJSON);
+      setLoading(false);
+    } catch (e) {
+      console.error("Error in search handler");
+      console.error(e);
+    }
   };
 
   return (
-    <div>
-      <div>
+    <>
+      <form onSubmit={handleSearch}>
         <input
-          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+          onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
           type="text"
           placeholder="Search"
         />
-        <button onClick={handleSearch}>Submit</button>
+        <button type="submit">Submit</button>
+      </form>
+      <div className="container">
+        {isLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <AlbumDetails searchResults={searchResults} />
+        )}
       </div>
-      <AlbumDetails searchResults={searchResults} />
-    </div>
+    </>
   );
 }
