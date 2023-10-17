@@ -12,7 +12,6 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    // confirm: '',
   });
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
@@ -35,8 +34,8 @@ const Signup = () => {
           password: formState.password,
         },
       });
-console.log(data.addUser.token)
-      Auth.login(data.addUser.token);
+console.log(data)
+      Auth.login(data.createUser.token);
     } catch (error) {
       console.error(error);
     }

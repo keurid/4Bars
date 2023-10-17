@@ -1,24 +1,59 @@
-import React from "react";
-// import { useMutation } from '@apollo/client';
-// import { Link } from 'react-router-dom';
-// import { LOGIN } from '../utils/mutations';
-// import Auth from '../utils/auth';
-// import Signup from '../components/Signup';
+import React, { useState } from 'react';
+import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { LOGIN } from "../utils/mutations";
+import Auth from "../utils/auth";
+import Signup from "../pages/Signup";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 
-const App = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+const Login = () => {
+
+  const [form] = Form.useForm();
+
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [login, { error, data }] = useMutation(LOGIN);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
+
+  const handleFormSubmit = async () => {
+    try {
+      console.log(formState);
+      const { data } = await login({
+        variables: {
+          username: formState.username,
+          email: formState.email,
+          password: formState.password,
+        },
+      });
+      console.log(data);
+      Auth.login(data.login.token);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Form
+      form={form}
+
       name="normal_login"
+      onFinish={handleFormSubmit}
       className="login-form"
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
       wrapperCol={{ span: 12 }}
     >
       <Form.Item
@@ -31,8 +66,11 @@ const App = () => {
         ]}
       >
         <Input
+          onChange={handleChange}
+          value={formState.username}
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Username"
+          name="username"
         />
       </Form.Item>
       <Form.Item
@@ -45,9 +83,13 @@ const App = () => {
         ]}
       >
         <Input
+          onChange={handleChange}
+          value={formState.password}
+
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
+          name="password"
         />
       </Form.Item>
       <Form.Item>
@@ -69,7 +111,7 @@ const App = () => {
     </Form>
   );
 };
-export default App;
+export default Login;
 
 // const App = () => {
 //   const [form] = Form.useForm();
