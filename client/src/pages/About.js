@@ -1,4 +1,6 @@
 import React from 'react';
+import Search from './Search';
+import DisplayTracks from '../components/50Tracks';
 
 const About = () => {
   const headingStyle = {
@@ -11,6 +13,8 @@ const About = () => {
   };
   return (
     <div>
+
+      {/* <DisplayTracks/> */}
       <h2 style={headingStyle}>About Us</h2>
       <p style={textStyle}>
         Welcome! We are the group Diamond Dogs. We were inspired to make a website dedicated to making a music playlist. We also wanted our project to look like our powerpoint theme.

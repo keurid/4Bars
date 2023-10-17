@@ -1,34 +1,46 @@
-import React, { useState } from 'react';
-import { Input, Space } from 'antd';
-
-const { Search } = Input;
-
+import React, { useState } from "react";
+import AlbumDetails from "../components/AlbumDetails/AlbumDetails";
 const key = "523532";
 
-const SearchComponent = () => {
-  const [search, setSearch] = useState("");
+export default function Search() {
+  const [searchForm, setSearchForm] = useState("");
+  const [isLoading, setLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState({});
 
-  const handleSearch = (value) => {
-    setSearch(value);
-    fetch(`https://www.theaudiodb.com/api/v1/json/${key}/search.php?s=${value}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => console.log(err));
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    try {
+      const searchData = await fetch(
+        `https://www.theaudiodb.com/api/v1/json/${key}/searchalbum.php?s=${searchForm}`
+      );
+      const searchResultsJSON = await searchData.json();
+      console.log("searchResults");
+      console.log(searchResultsJSON);
+      setSearchResults(searchResultsJSON);
+      setLoading(false);
+    } catch (e) {
+      console.error("Error in search handler");
+      console.error(e);
+    }
   };
 
   return (
-    <Space direction="vertical">
-      <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-        onSearch={handleSearch}
-      />
-    </Space>
+    <>
+      <form onSubmit={handleSearch}>
+        <input
+          onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
+          type="text"
+          placeholder="Search"
+        />
+        <button type="submit">Submit</button>
+      </form>
+      <div className="container">
+        {isLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <AlbumDetails searchResults={searchResults} />
+        )}
+      </div>
+    </>
   );
-};
-
-export default SearchComponent;
+}
