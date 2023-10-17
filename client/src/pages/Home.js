@@ -12,9 +12,10 @@ const Home = () => {
   return (
     <div style={{ position: 'relative' }}>
       <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-        {/* <audio controls autoPlay>
+      <audio controls autoPlay>
           <source src="lofi music.wav" type="audio/wav" />
-        </audio> */}
+          <source src="lofimp3.mp3" type="audio/mpeg" />
+        </audio>
       </div>
       <div style={{ paddingTop: '50px', textAlign: 'center' }}>
         <h2 style={headingStyle}>Welcome to the Home Page</h2>
