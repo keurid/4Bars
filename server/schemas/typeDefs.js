@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID
     email: String!
     username: String!
-    Playlist: [Playlist]
+    # Playlist: [Playlist]
   }
 
   type Playlist {

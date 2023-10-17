@@ -25,5 +25,5 @@ const songSchema = new Schema({
         type: String,
     }
 });
-
-module.exports = songSchema;
+const Song = model ("Song", songSchema)
+module.exports = Song;
