@@ -1,50 +1,34 @@
 import React, { useEffect, useState } from "react";
 
 const key = "523532";
-
-const AlbumDetails = () => {
-  const [albumDetails, setAlbumDetails] = useState(null);
-
-  useEffect(() => {
-    const fetchAlbumDetails = async () => {
-      try {
-        const album = localStorage.getItem("selectedAlbum");
-        const artist = localStorage.getItem("selectedArtist");
-
-        const response = await fetch(
-          `https://www.theaudiodb.com/api/v1/json/${key}/searchalbum.php?s=${artist}&a=${album}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch album details");
-        }
-
-        const data = await response.json();
-
-        setAlbumDetails(data);
-
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchAlbumDetails();
-  }, []);
-
-  return (
-    <main>
-      <h1>ALBUM DETAILS</h1>
-      {/* Render album details here */}
-      {albumDetails && (
-        <div>
-          <p>Title: {albumDetails.title}</p>
-          <p>Artist: {albumDetails.artist}</p>
-          {/* Add more details as needed */}
+const mockAlbumData = [{idAlbum: "stuff",idArtist:"stuff again"},{idAlbum: "stuff and back again",idArtist:"srake"},{idAlbum: "joe",idArtist:"mama"}]
+const AlbumDetails = (props) => {
+  console.log("AlbumDetails Component")
+  console.log(props)
+  return(
+    <>
+    
+    {mockAlbumData.map((album,index) => {
+      <div key ={index}>
+        <h1>{album.idAlbum}</h1>
+        <h2>{album.idArtist}</h2>
         </div>
-      )}
-    </main>
-  );
+    })
+          // props.map((album, index) => (
+    //       <div key={index}>
+    //         <ul
+    //           // onClick={() => handleLocalStorage(album.idAlbum, album.idArtist)}
+    //         >
+    //           <img src={album.strAlbumThumb}></img>
+    //           <p>{album.strAlbum}</p>
+    //         </ul>
+    //         <p>{album.idArtist}</p>
+    //       </div>
+    //     ))
+        }
+    </>
+  )
+ 
 };
 
 export default AlbumDetails;
