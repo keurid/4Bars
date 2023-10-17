@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
 
+
 const Home = () => {
   const headingStyle = {
     fontFamily: 'Satisfy, cursive',
@@ -20,8 +21,11 @@ const Home = () => {
         <Link to="/signup" style={{ marginRight: '10px' }}>
           <Button type="primary">Sign Up</Button>
         </Link>
-        <Link to="/login">
+        <Link to="/login" style={{ marginRight: '10px' }}>
           <Button type="primary">Log In</Button>
+        </Link>
+        <Link to="/about" style={{ marginRight: '10px' }}>
+          <Button type="primary">About Us</Button>
         </Link>
       </div>
     </div>

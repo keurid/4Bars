@@ -2,15 +2,14 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    _id: ID!
+    _id: ID
     email: String!
     username: String!
-    name: String!
     Playlist: [Playlist]
   }
 
   type Playlist {
-    _id: ID!
+    _id: ID
     name: String!
     description: String!
     songs: [Song]
@@ -25,23 +24,8 @@ const typeDefs = gql`
     strTrack: String
   }
 
-  input newSong {
-    idAlbum: Int
-    idArtist: Int!
-    idTrack: Int!
-    strAlbum: String
-    strArtist: String
-    strTrack: String
-  }
-
-  input newPlaylist {
-    name: String!
-    description: String!
-    songs: [newSong]
-  }
-
-  type auth {
-    token: ID!
+  type Auth {
+    token: ID
     user: User
   }
 
@@ -51,11 +35,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): auth
-    login(email: String!, password: String!): auth
-    createPlaylist(newPlaylist: newPlaylist): Playlist
+    createUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    createPlaylist(name: String!, description: String!, songs: [ID]): Playlist
     deletePlaylist(playlist_id: String): Boolean
-    saveSong(newSong: newSong): Playlist
+    saveSong(idAlbum: String, idArtist: String!, idTrack: String!, strAlbum: String, strTrack: String, strTrackThumb: String): Playlist
     deleteSong(idTrack: Int): Playlist
   }
 `;

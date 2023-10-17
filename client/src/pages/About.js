@@ -1,14 +1,19 @@
 import React from 'react';
-import Search from './Search';
 
 const About = () => {
+  const headingStyle = {
+    fontFamily: 'Satisfy, cursive',
+    color: '#c5f7ff',
+  }
+    const textStyle = {
+      color: 'white',
+      fontFamily: 'Alata, sans-serif',
+  };
   return (
     <div>
-      <Search />
-      <h2>About Us</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      <h2 style={headingStyle}>About Us</h2>
+      <p style={textStyle}>
+        Welcome! We are the group Diamond Dogs. We were inspired to make a website dedicated to making a music playlist. We also wanted our project to look like our powerpoint theme.
       </p>
     </div>
   );

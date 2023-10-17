@@ -1,87 +1,140 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Form, Input, Button } from 'antd';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
+import AuthService from '../utils/auth';
 
-function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+const Signup = () => {
+  const [form] = Form.useForm();
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
-  };
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm: '',
+  });
+
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+console.log (name)
+console.log(value)
     setFormState({
       ...formState,
       [name]: value,
     });
   };
 
-  return (
-    <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
+  const handleFormSubmit = async () => {
+    try {
+      console.log (formState)
+      const { data } = await addUser({
+        variables: {
+          username: formState.username,
+          email: formState.email,
+          password: formState.password,
+        },
+      });
 
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            placeholder="First"
-            name="firstName"
-            type="firstName"
-            id="firstName"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            placeholder="Last"
-            name="lastName"
-            type="lastName"
-            id="lastName"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      AuthService.login(data.addUser.token);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const headingStyle = {
+    fontFamily: 'Satisfy, cursive',
+    color: '#c5f7ff',
+  };
+
+  return (
+    <div style={{ width: '300px', margin: 'auto', marginTop: '100px' }}>
+      <h2 style={headingStyle}>Signup</h2>
+      <Form
+        form={form}
+        name="signup_form"
+        onFinish={handleFormSubmit}
+        scrollToFirstError
+      >
+        <Form.Item
+          value={formState.username}
+          onChange={handleChange}
+          rules={[{ required: true, message: 'Please input a username!' }]}
+        >
+          <Input placeholder="Username" name="username"/>
+
+        </Form.Item>
+
+        <Form.Item
+
+
+          value={formState.email}
+          onChange={handleChange}
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not a valid email address!',
+            },
+            {
+              required: true,
+              message: 'Please input your email!',
+            },
+          ]}
+        >
+          <Input placeholder="Email"           name="email"/>
+        </Form.Item>
+
+        <Form.Item
+
+
+          value={formState.password}
+          onChange={handleChange}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password placeholder="Password"           name="password"/>
+        </Form.Item>
+
+        <Form.Item
+
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error('The two passwords that you entered do not match!')
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password placeholder="Confirm Password"           name="confirm"/>
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Sign Up
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }
 
 export default Signup;
+
+
