@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
-import AuthService from '../utils/auth';
+
 
 const Signup = () => {
   const [form] = Form.useForm();
@@ -12,15 +12,13 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    confirm: '',
+    // confirm: '',
   });
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-console.log (name)
-console.log(value)
     setFormState({
       ...formState,
       [name]: value,
@@ -37,8 +35,8 @@ console.log(value)
           password: formState.password,
         },
       });
-
-      AuthService.login(data.addUser.token);
+console.log(data.addUser.token)
+      Auth.login(data.addUser.token);
     } catch (error) {
       console.error(error);
     }
@@ -101,7 +99,7 @@ console.log(value)
           <Input.Password placeholder="Password"           name="password"/>
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
 
           dependencies={['password']}
           hasFeedback
@@ -123,7 +121,7 @@ console.log(value)
           ]}
         >
           <Input.Password placeholder="Confirm Password"           name="confirm"/>
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
