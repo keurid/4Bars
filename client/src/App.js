@@ -10,7 +10,7 @@ import Search from "./pages/Search.js"
 import Playlist from "./pages/Playlist.js";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import AlbumDetails from './components/AlbumDetails/AlbumDetails';
+
 import Nav from './components/Nav';
 
 const httpLink = createHttpLink({
@@ -41,7 +41,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* <Route path="/album" element={<AlbumDetails />}/> */}
           <Route path="/search" element={<Search />} />
           <Route path="/playlist" element={<Playlist />} />
         </Routes>
