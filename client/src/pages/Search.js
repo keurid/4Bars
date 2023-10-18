@@ -36,6 +36,9 @@ export default function Search() {
     <>
       <form onSubmit={handleSearch}>
         <input className="search"
+       style={{ 
+        width: '1000px', 
+    }}
           onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
           type="text"
           placeholder="Search"
