@@ -11,7 +11,7 @@ const Home = () => {
         <h2 style={headingStyle}>Welcome to the Home Page</h2>
         <img src="lofigirl.jpg" alt="lofigirl" />
       </div>
-      <div style={{ position: "absolute", bottom: "-250px", right: "10px" }}>
+      <div style={{ textAlign: "center" }}>
         <audio controls autoPlay>
           <source src="lofi music.wav" type="audio/wav" />
           <source src="lofimp3.mp3" type="audio/mpeg" />

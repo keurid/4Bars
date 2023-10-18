@@ -15,6 +15,9 @@ function Nav() {
           <Link to="/about" style={{ marginRight: "10px" }}>
             <Button type="primary">About Us</Button>
           </Link>
+          <Link to="/playlist" style={{ marginRight: "10px" }}>
+            <Button type="primary">Playlist</Button>
+          </Link>
           {/* this is not using the Link component to logout or user and then refresh the application to the start */}
           <a
             href="/"
@@ -27,7 +30,7 @@ function Nav() {
       );
     } else {
       return (
-        <div style={{ display: "flex" }}>
+        <div style={{ position: "absolute", top: "10px", right: "10px" }}>
           <Link to="/signup" style={{ marginRight: "10px" }}>
             <Button type="primary">Sign Up</Button>
           </Link>
