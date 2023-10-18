@@ -7,6 +7,7 @@ import Home from "./pages/Home.js";
 import About from "./pages/About.js"; 
 import Signup from "./pages/Signup.js"
 import Search from "./pages/Search.js"
+import Playlist from "./pages/Playlist.js";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import AlbumDetails from './components/AlbumDetails/AlbumDetails';
@@ -41,7 +42,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {/* <Route path="/album" element={<AlbumDetails />}/> */}
-          <Route path="/search" element={<Search />}/>
+          <Route path="/search" element={<Search />} />
+          <Route path="/playlist" element={<Playlist />} />
         </Routes>
         <Footer />
       </Router>
