@@ -8,18 +8,13 @@ function Nav() {
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
+        <div style={{ position: "absolute", top: "10px", right: "10px" }}>
             <Link to="/search" style={{ marginRight: "10px" }}>
               <Button type="primary">Album Search</Button>
             </Link>
-            <li>
               <Link to="/about" style={{ marginRight: "10px" }}>
                 <Button type="primary">About Us</Button>
               </Link>
-            </li>
-          </li>
-          <li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a
               href="/"
@@ -28,15 +23,11 @@ function Nav() {
             >
               <Button type="primary">Logout</Button>
             </a>
-          </li>
-        </ul>
+        </div>
       );
     } else {
       return (
-        <div style={{ position: "relative" }}>
-          <div
-            style={{ position: "absolute", top: "10px", right: "10px" }}
-          ></div>
+        <div style={{ display: "flex" }}>
           <Link to="/signup" style={{ marginRight: "10px" }}>
             <Button type="primary">Sign Up</Button>
           </Link>
