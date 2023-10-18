@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <Link to="/" style={{ textDecoration: "none" }}>
-      <h1 style={headingStyle}>4Bars</h1>
+      <h1 style={headingStyle}>🎵4Bars</h1>
     </Link>
   );
 };

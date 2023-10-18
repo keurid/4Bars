@@ -1,6 +1,8 @@
 
 import React, { useState } from "react";
 import "../components/AlbumDetails/search.css"
+import { Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import AlbumDetails from "../components/AlbumDetails/AlbumDetails";
 const key = "523532";
 
@@ -9,7 +11,10 @@ export default function Search() {
   const [searchForm, setSearchForm] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [searchResults, setSearchResults] = useState({});
-
+  const headingStyle = {
+    fontFamily: "Satisfy, cursive",
+    color: "#c5f7ff",
+  };
   const handleSearch = async (event) => {
     event.preventDefault();
     try {
@@ -35,11 +40,13 @@ export default function Search() {
           type="text"
           placeholder="Search"
         />
-        <button type="submit">Submit</button>
+        <Button icon={<SearchOutlined />} onClick={handleSearch}>
+          Search
+        </Button>{" "}
       </form>
       <div className="container">
         {isLoading ? (
-          <h1>Loading...</h1>
+          <h1 style={headingStyle}>Loading...</h1>
         ) : (
           <AlbumDetails searchResults={searchResults} />
         )}

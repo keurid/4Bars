@@ -1,33 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'antd';
-
-
+import React from "react";
 
 const Home = () => {
   const headingStyle = {
-    fontFamily: 'Satisfy, cursive',
-    color: '#c5f7ff',
+    fontFamily: "Satisfy, cursive",
+    color: "#c5f7ff",
   };
   return (
-    <div style={{ position: 'relative' }}>
-      <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-      <audio controls autoPlay>
+    <div style={{ position: "relative" }}>
+      <div style={{ paddingTop: "50px", textAlign: "center" }}>
+        <h2 style={headingStyle}>Welcome to the Home Page</h2>
+        <img src="lofigirl.jpg" alt="lofigirl" />
+      </div>
+      <div style={{ position: "absolute", bottom: "-250px", right: "10px" }}>
+        <audio controls autoPlay>
           <source src="lofi music.wav" type="audio/wav" />
           <source src="lofimp3.mp3" type="audio/mpeg" />
         </audio>
-      </div>
-      <div style={{ paddingTop: '50px', textAlign: 'center' }}>
-        <h2 style={headingStyle}>Welcome to the Home Page</h2>
-        <Link to="/signup" style={{ marginRight: '10px' }}>
-          <Button type="primary">Sign Up</Button>
-        </Link>
-        <Link to="/login" style={{ marginRight: '10px' }}>
-          <Button type="primary">Log In</Button>
-        </Link>
-        <Link to="/about" style={{ marginRight: '10px' }}>
-          <Button type="primary">About Us</Button>
-        </Link>
       </div>
     </div>
   );
