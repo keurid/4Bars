@@ -9,7 +9,7 @@ const Home = () => {
     <div style={{ position: "relative" }}>
       <div style={{ paddingTop: "50px", textAlign: "center" }}>
         <h1 style={headingStyle}>Welcome to the Home Page</h1>
-        <img src="lofigirl.jpg" alt="lofigirl" />
+        <img src="lofigirl.jpg" alt="lofigirl"  style={{ width: '900px', height: '700px', borderRadius: '20px' }}/>
       </div>
       <div style={{ textAlign: "center" }}>
         <audio controls autoPlay>
