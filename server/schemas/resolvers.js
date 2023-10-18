@@ -37,9 +37,9 @@ const resolvers = {
       return { token, user };
     },
     createPlaylist: async (parent, args, context) => {
-      console.log("parent")
-      console.log(args)
-      console.log(context.user)
+      // console.log("parent")
+      // console.log(args)
+      // console.log(context.user)
       const newPlaylist = new Playlist(args)
       await newPlaylist.save()
       if (context.user) {
@@ -56,9 +56,14 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { Playlist: playlist_id } },
+          { $pull: { playlist: { playlist_id } } },
           { new: true }
         );
+    
+        if (!updatedUser) {
+          throw new Error('User not found');
+        }
+    
         return updatedUser;
       } else {
         throw new Error('No user found in the context');
