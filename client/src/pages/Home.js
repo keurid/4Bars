@@ -18,6 +18,7 @@ const Home = () => {
       </div>
       <div style={{ paddingTop: '50px', textAlign: 'center' }}>
         <h2 style={headingStyle}>Welcome to the Home Page</h2>
+        <img src = "lofigirl.jpg" alt ="lofigirl" />
       </div>
     </div>
   );
