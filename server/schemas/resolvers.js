@@ -36,12 +36,16 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    createPlaylist: async (parent, { newPlaylist }, context) => {
+    createPlaylist: async (parent, args, context) => {
+      console.log("parent")
+      console.log(args)
+      console.log(context.user)
+      const newPlaylist = new Playlist(args)
+      await newPlaylist.save()
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { Playlist: newPlaylist } },
-          { new: true }
+        await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { playlist: newPlaylist } }
         );
         return newPlaylist;
       } else {
