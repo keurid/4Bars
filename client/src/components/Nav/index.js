@@ -11,7 +11,9 @@ function Nav() {
     borderColor: '#F5FFFA',
     color: '#c5f7ff',
     fontFamily: "Alata, sans-serif",
-    
+    padding: '5px 25px',
+    fontSize: '15px',
+    textAlign: 'center',
   };
   function showNavigation() {
     if (Auth.loggedIn()) {
