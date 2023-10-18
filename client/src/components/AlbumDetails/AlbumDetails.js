@@ -18,11 +18,11 @@ const AlbumDetails = (props) => {
       
       {albumData.map((album, index) => (
         <div className="gridContainer" key={index}>
-          <ul className="gridItem">
+          <ul className="overlay">
             {/* onClick={() => handleLocalStorage(album.idAlbum, album.idArtist)} */}
             <img className="albumImg" src={album.strAlbumThumb} alt={album.strAlbum} />
 
-            {/* <p>{album.idArtist}{album.idAlbum}{album.strAlbum}</p> */}
+            {/* <p>{album.idArtist}{album.idAlbum}{album.strAlbum}<p> */}
           </ul>
         </div>
       ))}
