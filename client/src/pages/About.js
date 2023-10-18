@@ -1,6 +1,5 @@
 import React from "react";
 import Search from "./Search";
-import DisplayTracks from "../components/50Tracks";
 
 const About = () => {
   const headingStyle = {

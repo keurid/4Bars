@@ -37,9 +37,6 @@ const resolvers = {
       return { token, user };
     },
     createPlaylist: async (parent, args, context) => {
-      // console.log("parent")
-      // console.log(args)
-      // console.log(context.user)
       const newPlaylist = new Playlist(args)
       await newPlaylist.save()
       if (context.user) {

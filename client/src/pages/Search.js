@@ -97,8 +97,6 @@ export default function Search() {
         </Row>
         <pre>{JSON.stringify(isClicked, null, 2)}</pre>
 
-        {/* code to show modal  */}
-
         <Modal
           open={open}
           onClose={handleClose}
