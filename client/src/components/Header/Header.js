@@ -5,6 +5,7 @@ const Header = () => {
   const headingStyle = {
     fontFamily: "Satisfy, cursive",
     color: "#c5f7ff",
+    fontSize: '50px',
   };
 
   return (

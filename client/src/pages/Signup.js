@@ -3,6 +3,7 @@ import { Form, Input, Button } from "antd";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { ADD_USER } from "../utils/mutations";
+import { LockOutlined, UserOutlined, MailOutlined  } from "@ant-design/icons";
 
 const Signup = () => {
   const [form] = Form.useForm();
@@ -45,9 +46,19 @@ const Signup = () => {
     color: "#c5f7ff",
   };
 
+  const buttonStyle = {
+    background: '#191970',
+    borderColor: '#F5FFFA',
+    color: '#c5f7ff',
+    fontFamily: "Alata, sans-serif",
+    // padding: '5px 25px',
+    fontSize: '15px',
+    textAlign: 'center',
+  };
+
   return (
     <div style={{ width: "300px", margin: "auto", marginTop: "100px" }}>
-      <h2 style={headingStyle}>Signup</h2>
+      <h1 style={headingStyle}>Signup</h1>
       <Form
         form={form}
         name="signup_form"
@@ -59,7 +70,11 @@ const Signup = () => {
           onChange={handleChange}
           rules={[{ required: true, message: "Please input a username!" }]}
         >
-          <Input placeholder="Username" name="username" />
+          <Input
+            placeholder="Username"
+            name="username"
+            prefix={<UserOutlined className="site-form-item-icon" />}
+          />
         </Form.Item>
 
         <Form.Item
@@ -76,12 +91,13 @@ const Signup = () => {
             },
           ]}
         >
-          <Input placeholder="Email" name="email" />
+          <Input placeholder="Email" name="email"  prefix={<MailOutlined className="site-form-item-icon" />}/>
         </Form.Item>
 
         <Form.Item
           value={formState.password}
           onChange={handleChange}
+          
           rules={[
             {
               required: true,
@@ -89,11 +105,11 @@ const Signup = () => {
             },
           ]}
         >
-          <Input.Password placeholder="Password" name="password" />
+          <Input.Password placeholder="Password" name="password"  prefix={<LockOutlined className="site-form-item-icon" />}/>
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" style={buttonStyle} htmlType="submit">
             Sign Up
           </Button>
         </Form.Item>

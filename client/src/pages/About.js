@@ -20,7 +20,7 @@ const About = () => {
       <p style={textStyle}>
         We are the group Diamond Dogs 💎🐶. <br></br>We were inspired to make a
         website dedicated to making a music playlist 🎶.<br></br> We also wanted our project
-        to look like our powerpoint theme 👀. <br></br>
+        to look like our powerpoint theme 🌌🌃🎼. <br></br>
          Our members consist of Kevin, McCue, Yasmin, and Ashley 🎉
       </p>
     </div>
