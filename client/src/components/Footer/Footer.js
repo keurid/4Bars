@@ -24,7 +24,6 @@ const Footer = () => {
         movementOffset={0.8} // The number of pixels at which the GIF will move by for each interval.
         startingOffset={-20} // The offset at which the GIF starts from.
       />
-      <p style={textStyle}>Copyright ⓒ {year}</p>
     </footer>
   );
 };
