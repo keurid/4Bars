@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { Button, Tooltip, Space } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import AlbumDetails from "../components/AlbumDetails/AlbumDetails";
 const key = "523532";
 
 export default function Search() {
-  
   const [searchForm, setSearchForm] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [searchResults, setSearchResults] = useState({});
   const headingStyle = {
-    fontFamily: 'Satisfy, cursive',
-    color: '#c5f7ff',
+    fontFamily: "Satisfy, cursive",
+    color: "#c5f7ff",
   };
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -38,7 +37,9 @@ export default function Search() {
           type="text"
           placeholder="Search"
         />
-<Button icon={<SearchOutlined />}>Search</Button>
+        <Button icon={<SearchOutlined />} onClick={handleSearch}>
+          Search
+        </Button>{" "}
       </form>
       <div className="container">
         {isLoading ? (
