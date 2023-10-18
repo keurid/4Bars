@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
-
+import React, { useState } from "react";
+import { Form, Input, Button } from "antd";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { ADD_USER } from "../utils/mutations";
 
 const Signup = () => {
   const [form] = Form.useForm();
 
   const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
@@ -26,7 +25,7 @@ const Signup = () => {
 
   const handleFormSubmit = async () => {
     try {
-      console.log (formState)
+      console.log(formState);
       const { data } = await addUser({
         variables: {
           username: formState.username,
@@ -34,7 +33,7 @@ const Signup = () => {
           password: formState.password,
         },
       });
-console.log(data)
+      console.log(data);
       Auth.login(data.createUser.token);
     } catch (error) {
       console.error(error);
@@ -42,12 +41,12 @@ console.log(data)
   };
 
   const headingStyle = {
-    fontFamily: 'Satisfy, cursive',
-    color: '#c5f7ff',
+    fontFamily: "Satisfy, cursive",
+    color: "#c5f7ff",
   };
 
   return (
-    <div style={{ width: '300px', margin: 'auto', marginTop: '100px' }}>
+    <div style={{ width: "300px", margin: "auto", marginTop: "100px" }}>
       <h2 style={headingStyle}>Signup</h2>
       <Form
         form={form}
@@ -58,69 +57,40 @@ console.log(data)
         <Form.Item
           value={formState.username}
           onChange={handleChange}
-          rules={[{ required: true, message: 'Please input a username!' }]}
+          rules={[{ required: true, message: "Please input a username!" }]}
         >
-          <Input placeholder="Username" name="username"/>
-
+          <Input placeholder="Username" name="username" />
         </Form.Item>
 
         <Form.Item
-
-
           value={formState.email}
           onChange={handleChange}
           rules={[
             {
-              type: 'email',
-              message: 'The input is not a valid email address!',
+              type: "email",
+              message: "The input is not a valid email address!",
             },
             {
               required: true,
-              message: 'Please input your email!',
+              message: "Please input your email!",
             },
           ]}
         >
-          <Input placeholder="Email"           name="email"/>
+          <Input placeholder="Email" name="email" />
         </Form.Item>
 
         <Form.Item
-
-
           value={formState.password}
           onChange={handleChange}
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: "Please input your password!",
             },
           ]}
         >
-          <Input.Password placeholder="Password"           name="password"/>
+          <Input.Password placeholder="Password" name="password" />
         </Form.Item>
-
-        {/* <Form.Item
-
-          dependencies={['password']}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: 'Please confirm your password!',
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error('The two passwords that you entered do not match!')
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password placeholder="Confirm Password"           name="confirm"/>
-        </Form.Item> */}
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -130,8 +100,6 @@ console.log(data)
       </Form>
     </div>
   );
-}
+};
 
 export default Signup;
-
-

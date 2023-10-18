@@ -9,20 +9,20 @@ function Nav() {
     if (Auth.loggedIn()) {
       return (
         <div style={{ position: "absolute", top: "10px", right: "10px" }}>
-            <Link to="/search" style={{ marginRight: "10px" }}>
-              <Button type="primary">Album Search</Button>
-            </Link>
-              <Link to="/about" style={{ marginRight: "10px" }}>
-                <Button type="primary">About Us</Button>
-              </Link>
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a
-              href="/"
-              onClick={() => Auth.logout()}
-              style={{ marginRight: "10px" }}
-            >
-              <Button type="primary">Logout</Button>
-            </a>
+          <Link to="/search" style={{ marginRight: "10px" }}>
+            <Button type="primary">Album Search</Button>
+          </Link>
+          <Link to="/about" style={{ marginRight: "10px" }}>
+            <Button type="primary">About Us</Button>
+          </Link>
+          {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+          <a
+            href="/"
+            onClick={() => Auth.logout()}
+            style={{ marginRight: "10px" }}
+          >
+            <Button type="primary">Logout</Button>
+          </a>
         </div>
       );
     } else {
