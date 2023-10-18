@@ -11,8 +11,8 @@ const playlistList = () => {
     fontFamily: "Alata, sans-serif",
   };
   return (
-    <div>
-      <h2 style={headingStyle}>Playlist</h2>
+    <div style={{ textAlign: "center"}}>
+      <h1 style={headingStyle}> My Playlist</h1>
       <p style={textStyle}>
     
       </p>
