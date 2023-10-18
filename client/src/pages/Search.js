@@ -1,8 +1,11 @@
+
 import React, { useState } from "react";
+import "../components/AlbumDetails/search.css"
 import { Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import AlbumDetails from "../components/AlbumDetails/AlbumDetails";
 const key = "523532";
+
 
 export default function Search() {
   const [searchForm, setSearchForm] = useState("");
@@ -32,7 +35,7 @@ export default function Search() {
   return (
     <>
       <form onSubmit={handleSearch}>
-        <input
+        <input className="search"
           onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
           type="text"
           placeholder="Search"
