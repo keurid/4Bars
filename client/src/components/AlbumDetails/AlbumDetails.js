@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './albumDetails.css';
 
 const mockAlbumData = [
   { idAlbum: "stuff", idArtist: "stuff again" },
@@ -16,13 +17,12 @@ const AlbumDetails = (props) => {
       
       
       {albumData.map((album, index) => (
-        <div key={index}>
-          <ul>
+        <div className="gridContainer" key={index}>
+          <ul className="gridItem">
             {/* onClick={() => handleLocalStorage(album.idAlbum, album.idArtist)} */}
-            <img src={album.strAlbumThumb} alt={album.strAlbum} />
-            <p>{album.idAlbum}</p>
-            <p>{album.strAlbum}</p>
-            <p>{album.idArtist}</p>
+            <img className="albumImg" src={album.strAlbumThumb} alt={album.strAlbum} />
+
+            {/* <p>{album.idArtist}{album.idAlbum}{album.strAlbum}</p> */}
           </ul>
         </div>
       ))}
