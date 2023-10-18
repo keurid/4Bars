@@ -2,56 +2,55 @@ import React from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 import Search from "../../pages/Search";
+import { Button } from "antd";
 
 function Nav() {
-
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
         <ul className="flex-row">
           <li className="mx-1">
-            <Link to="/search">
-              Track Search
+            <Link to="/search" style={{ marginRight: "10px" }}>
+              <Button type="primary">Album Search</Button>
             </Link>
+            <li>
+              <Link to="/about" style={{ marginRight: "10px" }}>
+                <Button type="primary">About Us</Button>
+              </Link>
+            </li>
           </li>
           <li className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
+            <a
+              href="/"
+              onClick={() => Auth.logout()}
+              style={{ marginRight: "10px" }}
+            >
+              <Button type="primary">Logout</Button>
             </a>
           </li>
         </ul>
       );
     } else {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">
-              Signup
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
+        <div style={{ position: "relative" }}>
+          <div
+            style={{ position: "absolute", top: "10px", right: "10px" }}
+          ></div>
+          <Link to="/signup" style={{ marginRight: "10px" }}>
+            <Button type="primary">Sign Up</Button>
+          </Link>
+          <Link to="/login" style={{ marginRight: "10px" }}>
+            <Button type="primary">Log In</Button>
+          </Link>
+        </div>
       );
     }
   }
 
   return (
     <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="music-note">🎵</span>
-          4Bars
-        </Link>
-      </h1>
-
-      <nav>
-        {showNavigation()}
-      </nav>
+      <nav>{showNavigation()}</nav>
     </header>
   );
 }
