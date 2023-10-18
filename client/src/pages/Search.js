@@ -77,19 +77,7 @@ export default function Search() {
         </form>
       </div>
       <div className="container" style={{ textAlign: "center" }}>
-        <form onSubmit={handleSearch}>
-          <input className="search"
-            style={{
-              width: '1000px',
-            }}
-            onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
-            type="text"
-            placeholder="Search"
-          />
-          <Button icon={<SearchOutlined />} onClick={handleSearch}>
-            Search
-          </Button>{" "}
-        </form>
+       
         <Row gutter={16}>
           {isLoading ? (
             <h1 style={headingStyle}>Please enter an artist name!</h1>
