@@ -1,11 +1,9 @@
-
 import React, { useState } from "react";
-import "../components/AlbumDetails/search.css"
+import "../components/AlbumDetails/search.css";
 import { Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import AlbumDetails from "../components/AlbumDetails/AlbumDetails";
 const key = "523532";
-
 
 export default function Search() {
   const [searchForm, setSearchForm] = useState("");
@@ -34,22 +32,36 @@ export default function Search() {
 
   return (
     <>
-      <form onSubmit={handleSearch}>
-        <input className="search"
-       style={{ 
-        width: '1000px', 
-    }}
-          onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
-          type="text"
-          placeholder="Search"
-        />
-        <Button icon={<SearchOutlined />} onClick={handleSearch}>
-          Search
-        </Button>{" "}
-      </form>
-      <div className="container">
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <form onSubmit={handleSearch} style={{ display: "flex" }}>
+          <input
+            className="search"
+            onChange={(e) => setSearchForm(e.target.value.toLowerCase())}
+            type="text"
+            placeholder="Search"
+          />
+          <div style={{ marginLeft: "10px" }}>
+            <Button
+              icon={<SearchOutlined />}
+              onClick={handleSearch}
+              style={{
+                border: "1px solid rgba(252, 252, 252, 0.4)",
+                backgroundColor: "rgba(252, 252, 252, 0.2)",
+                height: "43px",
+                fontFamily: "Alata, sans-serif",
+
+                fontSize: "15px",
+                color: "white",
+              }}
+            >
+              Search
+            </Button>{" "}
+          </div>
+        </form>
+      </div>
+      <div className="container" style={{ textAlign: "center" }}>
         {isLoading ? (
-          <h1 style={headingStyle}>Loading...</h1>
+          <h1 style={headingStyle}>Please enter an artist name!</h1>
         ) : (
           <AlbumDetails searchResults={searchResults} />
         )}

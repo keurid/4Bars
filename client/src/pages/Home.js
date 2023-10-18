@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div style={{ position: "relative" }}>
       <div style={{ paddingTop: "50px", textAlign: "center" }}>
-        <h2 style={headingStyle}>Welcome to the Home Page</h2>
+        <h1 style={headingStyle}>Welcome to the Home Page</h1>
         <img src="lofigirl.jpg" alt="lofigirl" />
       </div>
       <div style={{ textAlign: "center" }}>
