@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID
     email: String!
     username: String!
-    # Playlist: [Playlist]
+    playlist: [Playlist]
   }
 
   type Playlist {
@@ -38,7 +38,7 @@ const typeDefs = gql`
     createUser(username: String!, email: String!, password: String!): Auth
     login(username: String!, password: String!): Auth
     createPlaylist(name: String, description: String, songs: [ID]): Playlist
-    deletePlaylist(playlist_id: String): Boolean
+    deletePlaylist(playlist_id: String): User
     saveSong(idAlbum: String, idArtist: String!, idTrack: String!, strAlbum: String, strTrack: String, strTrackThumb: String): Playlist
     deleteSong(idTrack: Int): Playlist
   }
