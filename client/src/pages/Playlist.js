@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { useMutation } from "@apollo/client";
-import PlaylistForm from '../components/PlaylistForm/PlaylistForm';
-import  { CREATE_PLAYLIST } from "../utils/mutations"
+//import SavedPlaylist from '../components/SavedPlaylist/SavedPlaylist'
 import Auth from "../utils/auth";
 import { Form, Input, Button } from "antd";
+
+import { useMutation } from "@apollo/client";
+import  { CREATE_PLAYLIST } from "../utils/mutations"
+
+import { useQuery } from '@apollo/client';
+import { QUERY_PLAYLIST } from '../utils/queries';
 
 
 
@@ -85,8 +89,12 @@ const handleChange = (event) => {
           Create Playlist!
         </Button>
       </Form.Item>
+      <div >
+      {/* <SavedPlaylist></SavedPlaylist> */}
+      </div>
     </Form>
   );
 };
+
 
 export default Playlist;

@@ -40,3 +40,4 @@ mutation CreatePlaylist($name: String, $description: String, $songs: [ID]) {
     }
   }
 }`;
+
