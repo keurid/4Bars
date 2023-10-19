@@ -4,11 +4,21 @@ const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
-    User: async () => {
+    Users: async () => {
       return User.find({});
+    },
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate('playlist');
     },
     Playlist: async () => {
       return Playlist.find({});
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      } else {
+        throw new Error('Need to be logged in!')
+      }
     },
   },
   Mutation: {
@@ -61,7 +71,7 @@ const resolvers = {
           {_id: context.user._id},
           { $pull: { playlist:{_id: playlist_id}  } },
         )
-          console.log(user)
+          // console.log(user)
         // if (!updatedUser) {
         //   throw new Error('User not found');
         // }
