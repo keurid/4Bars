@@ -17,8 +17,8 @@ const typeDefs = gql`
 
   type Song {
     idAlbum: Int
-    idArtist: Int!
-    idTrack: Int!
+    idArtist: Int
+    idTrack: Int
     strAlbum: String
     strArtist: String
     strTrack: String
@@ -30,8 +30,10 @@ const typeDefs = gql`
   }
 
   type Query {
-    User: [User]
+    Users: [User]
+    user(username: String!): User
     Playlist: [Playlist]
+    me: User
   }
 
   type Mutation {
@@ -39,7 +41,7 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
     createPlaylist(name: String, description: String, songs: [ID]): Playlist
     deletePlaylist(playlist_id: String): Playlist
-    saveSong(idAlbum: String, idArtist: String!, idTrack: String!, strAlbum: String, strTrack: String, strTrackThumb: String): Playlist
+    saveSong(idAlbum: String, idArtist: String, idTrack: String, strAlbum: String, strTrack: String, strTrackThumb: String): Playlist
     deleteSong(idTrack: Int): Playlist
   }
 `;
