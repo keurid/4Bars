@@ -1,14 +1,14 @@
 const { User, Playlist, Song } = require('../models');
 const { signToken } = require('../utils/auth');
+const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
     User: async () => {
       return User.find({});
     },
-    Playlist: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Playlist.find(params);
+    Playlist: async () => {
+      return Playlist.find({});
     },
   },
   Mutation: {
@@ -37,32 +37,36 @@ const resolvers = {
       return { token, user };
     },
     createPlaylist: async (parent, args, context) => {
-      const newPlaylist = new Playlist(args)
-      console.log(args)
-      await newPlaylist.save()
+      const newPlaylist = await Playlist.create(args)
+      console.log(newPlaylist)
+      // await newPlaylist.save()
       if (context.user) {
         await User.findByIdAndUpdate(
           context.user._id,
           { $push: { playlist: newPlaylist } }
         );
+        console.log(newPlaylist)
         return newPlaylist;
       } else {
         throw new Error('No user found in the context');
       }
     },
     deletePlaylist: async (parent, { playlist_id }, context) => {
+      // console.log(context.user)
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { playlist: { playlist_id } } },
-          { new: true }
-        );
+        const playlist = await Playlist.findOneAndDelete(
+          {_id: playlist_id}
+        )
+        const user = await User.findOneAndUpdate(
+          {_id: context.user._id},
+          { $pull: { playlist:{_id: playlist_id}  } },
+        )
+          console.log(user)
+        // if (!updatedUser) {
+        //   throw new Error('User not found');
+        // }
     
-        if (!updatedUser) {
-          throw new Error('User not found');
-        }
-    
-        return updatedUser;
+        return playlist;
       } else {
         throw new Error('No user found in the context');
       }
