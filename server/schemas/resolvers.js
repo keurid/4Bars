@@ -38,6 +38,7 @@ const resolvers = {
     },
     createPlaylist: async (parent, args, context) => {
       const newPlaylist = new Playlist(args)
+      console.log(args)
       await newPlaylist.save()
       if (context.user) {
         await User.findByIdAndUpdate(
