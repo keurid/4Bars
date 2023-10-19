@@ -2,7 +2,6 @@ import { gql } from "@apollo/client";
 
 export const QUERY_PLAYLIST = gql`
 query QueryPlaylist {
-  User {
     playlist {
       _id
       description
@@ -16,5 +15,34 @@ query QueryPlaylist {
         strTrack
       }
     }
-  }
 }`;
+
+export const QUERY_USER = gql`
+  query User($username: String!) {
+    user(username: $username) {
+      _id
+      username
+      email
+      playlist {
+        _id
+        name
+        description
+      }
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      playlist {
+          _id
+          name
+          description
+        }
+      }
+    }
+`;
