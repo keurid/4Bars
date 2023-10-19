@@ -66,7 +66,6 @@ export default function Search() {
                 backgroundColor: "rgba(252, 252, 252, 0.2)",
                 height: "43px",
                 fontFamily: "Alata, sans-serif",
-
                 fontSize: "15px",
                 color: "white",
               }}

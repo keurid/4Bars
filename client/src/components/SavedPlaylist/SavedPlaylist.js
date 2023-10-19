@@ -1,36 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { QUERY_PLAYLIST } from '../../utils/queries';
 
-const PlaylistList = () => {
-  const [playlists, setPlaylists] = useState([]);
-
-  useEffect(() => {
-    const fetchPlaylists = async () => {
-      try {
-        const response = await fetch('user/playlists');
-        const data = await response.json();
-
-        setPlaylists(data.playlists);
-      } catch (error) {
-        console.error('Error fetching playlists:', error);
-      }
-    };
-
-    fetchPlaylists();
-  }, []);
+const SavedPlaylist = ({
+  playlist,
+  name,
+  description,
+  songs,
+}) => {
+  if (!playlist.length){
+    return <h3> No playlist yet!</h3>
+  }
 
   return (
     <div>
-      <h2>Playlists</h2>
-      <ul>
-        {playlists.map((playlist) => (
-          <li key={playlist._id}>
-            {playlist.name}
-          </li>
-        ))}
-      </ul>
+      {playlist.map(playlist =>
+        <div>
+          <h1>{playlist.name}</h1>
+          <h2>{playlist.description}</h2>
+        </div>
+        )}
     </div>
   );
 };
 
-export default PlaylistList;
+export default SavedPlaylist;
