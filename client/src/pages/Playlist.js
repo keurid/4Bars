@@ -21,9 +21,10 @@ const PlaylistPage = () => {
 
 
   const user = data?.me || data?.user || {};
-  const playlist = data?.user.playlist || [];
-  console.log(user.playlist);
-  console.log(playlist);
+  const playlist = user.playlist || [];
+  // console.log(user.playlist);
+  // console.log(user.playlist);
+  // console.log(playlist);
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/playlist" />;
   }
@@ -60,7 +61,7 @@ const PlaylistPage = () => {
       </div>
       <div>
         <SavedPlaylist
-          playlists={playlist}
+          // playlists={playlist}
           // name={user.Playlist.name}
         />
 

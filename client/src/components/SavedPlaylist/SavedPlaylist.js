@@ -15,7 +15,7 @@ const SavedPlaylist = ({
     <div>
       {/* {<h3>{name}</h3>} */}
       {playlists &&
-      playlists.map((playlist,index) => (
+      playlists.map((playlist,key) => (
         <div key={playlist._id}>
         {/* // <div key={index}> */}
           <div>
