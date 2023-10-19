@@ -20,7 +20,7 @@ const SavedPlaylist = ({
         {/* // <div key={index}> */}
           <div>
             <p>{playlist.name}</p>
-            <p>{playlist.songs[0]}</p>
+            {/* <p>{playlist.songs[0]}</p> */}
             <p>{playlist.description}</p>
           </div>
         </div>
