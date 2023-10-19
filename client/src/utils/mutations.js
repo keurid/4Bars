@@ -23,3 +23,20 @@ mutation createUser ($username: String!, $email: String!, $password: String!) {
     }
   }
 }`;
+
+export const CREATE_PLAYLIST = gql`
+mutation CreatePlaylist($name: String, $description: String, $songs: [ID]) {
+  createPlaylist(name: $name, description: $description, songs: $songs) {
+    _id
+    description
+    name
+    songs {
+      idAlbum
+      idArtist
+      idTrack
+      strAlbum
+      strArtist
+      strTrack
+    }
+  }
+}`;
