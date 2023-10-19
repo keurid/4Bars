@@ -1,6 +1,8 @@
 import React, { useState} from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_PLAYLIST } from "../../utils/mutations";
+import {QUERY_PLAYLIST, QUERY_ME} from '../../utils/queries';
+
 import Auth from "../../utils/auth";
 import { Form, Input, Button } from "antd";
 
@@ -12,7 +14,14 @@ const PlaylistForm = () => {
       description: ""
     });
   
-  const [CreatePlaylist, {error, data}] = useMutation(CREATE_PLAYLIST);
+  const [CreatePlaylist, {error, data}] = useMutation(CREATE_PLAYLIST,{
+    refetchQueries:[
+      QUERY_PLAYLIST,
+      'QueryPlaylist',
+      QUERY_ME,
+      'me'
+    ]
+  });
   
   const handleChange = (event) => {
     const { name, value } = event.target;
