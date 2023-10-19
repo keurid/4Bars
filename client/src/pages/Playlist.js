@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import PlaylistForm from '../components/PlaylistForm/PlaylistForm';
+import SavedPlaylist from '../components/SavedPlaylist/SavedPlaylist'
 import  { CREATE_PLAYLIST } from "../utils/mutations"
 import Auth from "../utils/auth";
 import { Form, Input, Button } from "antd";
@@ -85,8 +86,12 @@ const handleChange = (event) => {
           Create Playlist!
         </Button>
       </Form.Item>
+      <div >
+      <SavedPlaylist></SavedPlaylist>
+      </div>
     </Form>
   );
 };
+
 
 export default Playlist;
