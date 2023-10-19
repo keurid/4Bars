@@ -10,14 +10,19 @@ const SavedPlaylist = ({
   // if (!playlists.length){
   //   return <h3> No playlist yet!</h3>
   // }
-
+  console.log(playlists);
   return (
     <div>
       {/* {<h3>{name}</h3>} */}
       {playlists &&
-      playlists.map((playlist) => (
-        <div key={playlist._id}>
+      playlists.map((playlist,index) => (
+        // <div key={playlist._id}>
+        <div key={index}>
           <div>
+            <p>{playlist.name}</p>
+            <p>{playlist.songs[0]}</p>
+
+
             <p>{playlist.description}</p>
           </div>
         </div>

@@ -11,6 +11,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
+const fakePlaylist = [{name:"chris", description:"ta",songs:["lover not a fighter"]},{name:"emma", description:"ta",songs:["lover not a fighter"]},{name:"jessica", description:"ta",songs:["lover not a fighter"]}]
 const PlaylistPage = () => {
 
   const { username: userParam } = useParams();
@@ -38,10 +39,11 @@ const PlaylistPage = () => {
     );
   }
 
-  const displayPlaylist = () =>{
-    const { loading, data } = useQuery(QUERY_PLAYLIST);
-    const playlist = data?.playlist || [];
-  }
+
+  // const displayPlaylist = () =>{
+  //   const { loading, data } = useQuery(QUERY_PLAYLIST);
+  //   const playlist = data?.playlist || [];
+  // }
   
 
   return (
@@ -51,9 +53,10 @@ const PlaylistPage = () => {
       </div>
       <div>
         <SavedPlaylist
-          playlists={user.Playlist}
+          playlists={fakePlaylist}
           // name={user.Playlist.name}
         />
+
       </div>
     </div>
   )
