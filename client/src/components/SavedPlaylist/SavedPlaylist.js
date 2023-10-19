@@ -21,8 +21,6 @@ const SavedPlaylist = ({
           <div>
             <p>{playlist.name}</p>
             <p>{playlist.songs[0]}</p>
-
-
             <p>{playlist.description}</p>
           </div>
         </div>

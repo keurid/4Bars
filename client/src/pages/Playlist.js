@@ -60,7 +60,7 @@ const PlaylistPage = () => {
       </div>
       <div>
         <SavedPlaylist
-          // playlists={fakePlaylist}
+          playlists={playlist}
           // name={user.Playlist.name}
         />
 
