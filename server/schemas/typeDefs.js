@@ -31,14 +31,14 @@ const typeDefs = gql`
 
   type Query {
     User: [User]
-    Playlist(_id: String): [Playlist]
+    Playlist: [Playlist]
   }
 
   type Mutation {
     createUser(username: String!, email: String!, password: String!): Auth
     login(username: String!, password: String!): Auth
     createPlaylist(name: String, description: String, songs: [ID]): Playlist
-    deletePlaylist(playlist_id: String): User
+    deletePlaylist(playlist_id: String): Playlist
     saveSong(idAlbum: String, idArtist: String!, idTrack: String!, strAlbum: String, strTrack: String, strTrackThumb: String): Playlist
     deleteSong(idTrack: Int): Playlist
   }
