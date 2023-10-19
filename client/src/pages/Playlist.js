@@ -61,6 +61,12 @@ const handleChange = (event) => {
     textAlign: 'center',
   }
 
+  const displayPlaylist = () =>{
+    const { loading, data } = useQuery(QUERY_PLAYLIST);
+    const playlist = data?.playlist || [];
+  }
+  
+
   return (
     <Form 
     form = {form}
@@ -91,6 +97,7 @@ const handleChange = (event) => {
       </Form.Item>
       <div >
       {/* <SavedPlaylist></SavedPlaylist> */}
+      <displayPlaylist />
       </div>
     </Form>
   );
